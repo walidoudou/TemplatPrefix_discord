@@ -1,0 +1,16 @@
+Type: Exception non gérée
+Date: 17/03/2025 18:47:05
+Message: console[(intermediate value)(intermediate value)(intermediate value)] is not a function
+Stack: TypeError: console[(intermediate value)(intermediate value)(intermediate value)] is not a function
+    at Object.log (F:\DEV\Templates\Prefix\handlers\logHandler.js:101:49)
+    at process.<anonymous> (F:\DEV\Templates\Prefix\handlers\antiCrashHandler.js:28:20)
+    at process.emit (node:events:529:35)
+    at doEmitWarning (node:internal/process/warning:89:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+Origine: uncaughtException
+
+Informations système:
+Node.js: v18.20.6
+OS: win32 x64
+Mémoire utilisée: 89 MB
+PID: 26732

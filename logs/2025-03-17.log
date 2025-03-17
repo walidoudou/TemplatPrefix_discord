@@ -218,3 +218,54 @@ Require stack:
 [17/03/2025 18:26:53] [INFO] [Commandes] Commande mise à jour: owners.js
 [17/03/2025 18:27:02] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande owners dans Config ♛
 [17/03/2025 18:27:17] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande ping dans Config ♛
+[17/03/2025 18:33:57] [ERROR] [Commandes] La commande F:\DEV\Templates\Prefix\commands\everyone\help.js est invalide (il manque le nom ou la fonction run)
+[17/03/2025 18:33:57] [INFO] [Commandes] Commande ajoutée: help.js
+[17/03/2025 18:34:27] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:34:27] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:34:31] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:34:31] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:34:31] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:34:39] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande help dans Config ♛
+[17/03/2025 18:38:28] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:38:28] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:38:28] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:38:30] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:38:30] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:38:30] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:38:37] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande help dans Config ♛
+[17/03/2025 18:43:57] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:43:57] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:43:57] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:43:59] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:43:59] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:43:59] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:44:00] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:44:00] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:44:00] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:44:11] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande help dans Config ♛
+[17/03/2025 18:44:48] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:44:48] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:44:48] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:45:26] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:45:26] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:45:26] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:45:26] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:45:26] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:45:26] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:45:49] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:45:49] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:45:49] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:46:21] [INFO] [Prefix] Préfixe modifié sur Config ♛ (1326595552477057045) de "!" à "w?" par .br0kenhe4rt
+[17/03/2025 18:46:22] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande prefix dans Config ♛
+[17/03/2025 18:46:44] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande help dans Config ♛
+[17/03/2025 18:47:05] [ERROR] [Système] Exception non gérée: console[(intermediate value)(intermediate value)(intermediate value)] is not a function
+[17/03/2025 18:47:05] [INFO] [Système] Détails de l'erreur enregistrés dans F:\DEV\Templates\Prefix\logs\crashes\crash-2025-03-17T17-47-05.924Z.log
+[17/03/2025 18:48:22] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande help dans Config ♛
+[17/03/2025 18:48:59] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:48:59] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:48:59] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:49:00] [DEBUG] [Commandes] Commande déchargée: help
+[17/03/2025 18:49:00] [DEBUG] [Commandes] Commande chargée: help
+[17/03/2025 18:49:00] [INFO] [Commandes] Commande mise à jour: help.js
+[17/03/2025 18:49:09] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande help dans Config ♛
+[17/03/2025 18:49:18] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande owners dans Config ♛
