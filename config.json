@@ -1,0 +1,44 @@
+{
+  "bot": {
+    "name": "TemplatePrefix",
+    "mainPrefix": "+",
+    "activity": "TemplatePrefix",
+    "status": "online"
+  },
+  "developers": ["599599482405126152"],
+  "owners": ["599599482405126152"],
+  "embed": {
+    "color": "#3498db",
+    "footer": "TemplatePrefix - Créé avec ❤️",
+    "thumbnail": ""
+  },
+  "messages": {
+    "error": {
+      "title": "Erreur",
+      "description": "Une erreur s'est produite lors de l'exécution de cette commande.",
+      "permission": "Vous n'avez pas la permission d'utiliser cette commande."
+    },
+    "warning": {
+      "title": "Attention",
+      "description": "Veuillez faire attention aux paramètres fournis."
+    },
+    "success": {
+      "title": "Succès",
+      "description": "L'opération a été effectuée avec succès."
+    },
+    "info": {
+      "title": "Information",
+      "description": "Voici les informations demandées."
+    }
+  },
+  "console": {
+    "colors": {
+      "info": "cyan",
+      "success": "green",
+      "warning": "yellow",
+      "error": "red",
+      "debug": "magenta"
+    },
+    "updateInterval": 900000
+  }
+}
