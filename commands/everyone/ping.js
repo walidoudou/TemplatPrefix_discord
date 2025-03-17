@@ -3,14 +3,15 @@
  * Permet de vérifier la latence du bot et l'état de la connexion
  */
 
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, version: discordVersion } = require('discord.js');
+const os = require('os');
 
 module.exports = {
     name: 'ping',
-    description: 'Affiche la latence du bot',
+    description: 'Affiche la latence du bot et diverses informations système',
     category: 'Utilitaires',
     usage: 'ping',
-    aliases: ['latence'],
+    aliases: ['latence', 'pong'],
     cooldown: 5, // Cooldown en secondes
 
     /**
@@ -21,47 +22,86 @@ module.exports = {
      */
     async run(client, message, args) {
         try {
-            // Mesure du temps de réponse
-            const initialTime = Date.now();
+            // Message initial pour mesurer la latence
+            const loadingEmbed = new EmbedBuilder()
+                .setColor(client.config.embed.color)
+                .setDescription("🔍 **Calcul des latences en cours...**")
+                .setFooter({
+                    text: client.config.embed.footer,
+                    iconURL: client.user.displayAvatarURL()
+                });
 
-            // Envoi d'un message temporaire
-            const sentMessage = await message.channel.send('Calcul de la latence...');
+            const initialTime = Date.now();
+            const sentMessage = await message.reply({ embeds: [loadingEmbed] });
 
             // Calcul des différentes latences
             const botLatency = Date.now() - initialTime;
             const apiLatency = Math.round(client.ws.ping);
 
             // Classement des performances
-            let performanceEmoji, performanceColor;
+            const getPerformanceInfo = (ms) => {
+                if (ms < 50) {
+                    return { emoji: '🟢', color: '#2ecc71', text: 'Excellente' };
+                } else if (ms < 100) {
+                    return { emoji: '🟡', color: '#f1c40f', text: 'Bonne' };
+                } else if (ms < 200) {
+                    return { emoji: '🟠', color: '#e67e22', text: 'Moyenne' };
+                } else {
+                    return { emoji: '🔴', color: '#e74c3c', text: 'Élevée' };
+                }
+            };
 
-            if (apiLatency < 50) {
-                performanceEmoji = '🟢';
-                performanceColor = '#00FF00';
-            } else if (apiLatency < 100) {
-                performanceEmoji = '🟡';
-                performanceColor = '#FFFF00';
-            } else if (apiLatency < 200) {
-                performanceEmoji = '🟠';
-                performanceColor = '#FFA500';
-            } else {
-                performanceEmoji = '🔴';
-                performanceColor = '#FF0000';
-            }
+            const botPerformance = getPerformanceInfo(botLatency);
+            const apiPerformance = getPerformanceInfo(apiLatency);
 
-            // Création de l'embed
-            const embed = new EmbedBuilder()
-                .setTitle('🏓 Pong!')
-                .setColor(performanceColor)
+            // Informations système
+            const memoryUsage = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
+            const cpuUsage = (os.loadavg()[0]).toFixed(2);
+            const osInfo = `${os.platform()} ${os.arch()}`;
+
+            // Mise à jour de l'embed
+            const pingEmbed = new EmbedBuilder()
+                .setAuthor({
+                    name: 'Informations de latence',
+                    iconURL: client.user.displayAvatarURL()
+                })
+                .setColor(apiPerformance.color)
+                .setTitle(`${apiPerformance.emoji} Pong! - Latence globale: ${botLatency}ms`)
                 .addFields(
-                    { name: 'Latence du bot', value: `${botLatency}ms`, inline: true },
-                    { name: 'Latence de l\'API', value: `${apiLatency}ms ${performanceEmoji}`, inline: true },
-                    { name: 'Uptime', value: client.getUptime(), inline: false }
+                    {
+                        name: "📡 Latence du bot",
+                        value: `${botPerformance.emoji} **${botLatency}ms** - ${botPerformance.text}`,
+                        inline: true
+                    },
+                    {
+                        name: "⚡ Latence de l'API",
+                        value: `${apiPerformance.emoji} **${apiLatency}ms** - ${apiPerformance.text}`,
+                        inline: true
+                    },
+                    { name: '\u200B', value: '\u200B', inline: true }, // Séparateur
+                    {
+                        name: "⏱️ Uptime",
+                        value: `\`${client.getUptime()}\``,
+                        inline: true
+                    },
+                    {
+                        name: "💾 Mémoire",
+                        value: `\`${memoryUsage} MB\``,
+                        inline: true
+                    },
+                    {
+                        name: "🖥️ CPU",
+                        value: `\`${cpuUsage}%\``,
+                        inline: true
+                    }
                 )
-                .setFooter({ text: client.config.embed.footer })
+                .setFooter({
+                    text: `Discord.js v${discordVersion} | Node ${process.version} | ${osInfo}`,
+                })
                 .setTimestamp();
 
             // Mise à jour du message temporaire avec l'embed
-            await sentMessage.edit({ content: null, embeds: [embed] });
+            await sentMessage.edit({ embeds: [pingEmbed] });
 
         } catch (error) {
             console.error('Erreur dans la commande ping:', error);

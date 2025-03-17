@@ -12,7 +12,8 @@ module.exports = {
     description: 'Affiche ou modifie le préfixe du bot',
     category: 'Configuration',
     usage: 'prefix [nouveau préfixe]',
-    aliases: ['setprefix'],
+    examples: ['prefix', 'prefix !', 'prefix ?'],
+    aliases: ['setprefix', 'changeprefix'],
     cooldown: 10,
     guildOnly: true, // Cette commande ne peut être utilisée que dans un serveur
     userPermissions: ['Administrator'], // Nécessite la permission Administrateur
@@ -25,16 +26,28 @@ module.exports = {
      */
     async run(client, message, args) {
         try {
+            // Message de chargement
+            const loadingEmbed = new EmbedBuilder()
+                .setColor(client.config.embed.color)
+                .setDescription("⌛ **Traitement de la demande en cours...**");
+
+            const loadingMsg = await message.reply({ embeds: [loadingEmbed] });
+
             // Si un développeur ou propriétaire utilise la commande, ignorer la vérification des permissions
             const bypassPermissions = client.isDeveloper(message.author.id) || client.isOwner(message.author.id);
 
             // Vérifier les permissions si l'utilisateur n'est pas un développeur ou propriétaire
             if (!bypassPermissions && !message.member.permissions.has(PermissionFlagsBits.Administrator)) {
-                return message.reply({
+                return loadingMsg.edit({
                     embeds: [
                         new EmbedBuilder()
-                            .setColor(client.config.embed.color)
-                            .setDescription('❌ Vous devez être administrateur pour utiliser cette commande.')
+                            .setColor("#e74c3c")
+                            .setTitle("❌ Permissions insuffisantes")
+                            .setDescription("Vous devez être administrateur pour utiliser cette commande.")
+                            .setFooter({
+                                text: client.config.embed.footer,
+                                iconURL: client.user.displayAvatarURL()
+                            })
                     ]
                 });
             }
@@ -44,13 +57,31 @@ module.exports = {
 
             // Si aucun argument n'est fourni, afficher le préfixe actuel
             if (!args[0]) {
-                return message.reply({
+                return loadingMsg.edit({
                     embeds: [
                         new EmbedBuilder()
                             .setColor(client.config.embed.color)
-                            .setTitle('Préfixe actuel')
+                            .setAuthor({
+                                name: `${message.guild.name} - Configuration du préfixe`,
+                                iconURL: message.guild.iconURL({ dynamic: true })
+                            })
+                            .setTitle("📋 Préfixe actuel")
                             .setDescription(`Le préfixe actuel sur ce serveur est \`${currentPrefix}\``)
-                            .setFooter({ text: `Pour le modifier, utilisez ${currentPrefix}prefix <nouveau préfixe>` })
+                            .addFields(
+                                {
+                                    name: "ℹ️ Information",
+                                    value: `Pour modifier le préfixe, utilisez \`${currentPrefix}prefix <nouveau préfixe>\`\nExemple: \`${currentPrefix}prefix !\``
+                                },
+                                {
+                                    name: "📝 Exemples d'utilisation",
+                                    value: `\`${currentPrefix}help\` - Afficher l'aide\n\`${currentPrefix}ping\` - Afficher la latence`
+                                }
+                            )
+                            .setFooter({
+                                text: `Demandé par ${message.author.tag} | ${client.config.embed.footer}`,
+                                iconURL: message.author.displayAvatarURL({ dynamic: true })
+                            })
+                            .setTimestamp()
                     ]
                 });
             }
@@ -60,22 +91,32 @@ module.exports = {
 
             // Vérifier que le préfixe n'est pas trop long
             if (newPrefix.length > 5) {
-                return message.reply({
+                return loadingMsg.edit({
                     embeds: [
                         new EmbedBuilder()
-                            .setColor(client.config.embed.color)
-                            .setDescription('❌ Le préfixe ne peut pas dépasser 5 caractères.')
+                            .setColor("#e67e22")
+                            .setTitle("⚠️ Préfixe trop long")
+                            .setDescription("Le préfixe ne peut pas dépasser 5 caractères.")
+                            .setFooter({
+                                text: client.config.embed.footer,
+                                iconURL: client.user.displayAvatarURL()
+                            })
                     ]
                 });
             }
 
             // Si le nouveau préfixe est identique à l'actuel, ne rien faire
             if (newPrefix === currentPrefix) {
-                return message.reply({
+                return loadingMsg.edit({
                     embeds: [
                         new EmbedBuilder()
-                            .setColor(client.config.embed.color)
+                            .setColor("#e67e22")
+                            .setTitle("⚠️ Préfixe identique")
                             .setDescription(`Le préfixe \`${newPrefix}\` est déjà défini sur ce serveur.`)
+                            .setFooter({
+                                text: client.config.embed.footer,
+                                iconURL: client.user.displayAvatarURL()
+                            })
                     ]
                 });
             }
@@ -84,11 +125,16 @@ module.exports = {
             const success = await databaseHandler.changeGuildPrefix(message.guild.id, newPrefix);
 
             if (!success) {
-                return message.reply({
+                return loadingMsg.edit({
                     embeds: [
                         new EmbedBuilder()
-                            .setColor(client.config.embed.color)
-                            .setDescription('❌ Une erreur est survenue lors de la modification du préfixe.')
+                            .setColor("#e74c3c")
+                            .setTitle("❌ Erreur")
+                            .setDescription("Une erreur est survenue lors de la modification du préfixe.")
+                            .setFooter({
+                                text: client.config.embed.footer,
+                                iconURL: client.user.displayAvatarURL()
+                            })
                     ]
                 });
             }
@@ -97,19 +143,47 @@ module.exports = {
             logHandler.log('info', 'Prefix', `Préfixe modifié sur ${message.guild.name} (${message.guild.id}) de "${currentPrefix}" à "${newPrefix}" par ${message.author.tag}`);
 
             // Envoyer la confirmation
-            return message.reply({
+            return loadingMsg.edit({
                 embeds: [
                     new EmbedBuilder()
-                        .setColor(client.config.embed.color)
-                        .setTitle('✅ Préfixe modifié')
+                        .setColor("#2ecc71")
+                        .setAuthor({
+                            name: `${message.guild.name} - Configuration du préfixe`,
+                            iconURL: message.guild.iconURL({ dynamic: true })
+                        })
+                        .setTitle("✅ Préfixe modifié")
                         .setDescription(`Le préfixe a été changé de \`${currentPrefix}\` à \`${newPrefix}\``)
-                        .setFooter({ text: client.config.embed.footer })
+                        .addFields(
+                            { name: "Ancien préfixe", value: `\`${currentPrefix}\``, inline: true },
+                            { name: "Nouveau préfixe", value: `\`${newPrefix}\``, inline: true },
+                            { name: "Modifié par", value: `${message.author}`, inline: true },
+                            {
+                                name: "📝 Exemples d'utilisation",
+                                value: `\`${newPrefix}help\` - Afficher l'aide\n\`${newPrefix}ping\` - Afficher la latence`
+                            }
+                        )
+                        .setFooter({
+                            text: `${message.author.tag} | ${client.config.embed.footer}`,
+                            iconURL: message.author.displayAvatarURL({ dynamic: true })
+                        })
+                        .setTimestamp()
                 ]
             });
 
         } catch (error) {
             logHandler.log('error', 'Prefix', `Erreur: ${error.message}`);
-            message.reply('Une erreur est survenue lors de l\'exécution de cette commande.');
+            message.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor("#e74c3c")
+                        .setTitle("❌ Erreur")
+                        .setDescription("Une erreur est survenue lors de l'exécution de cette commande.")
+                        .setFooter({
+                            text: client.config.embed.footer,
+                            iconURL: client.user.displayAvatarURL()
+                        })
+                ]
+            });
         }
     }
 };

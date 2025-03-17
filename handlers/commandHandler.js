@@ -18,21 +18,25 @@ const commandPaths = new Map();
  */
 function init(client) {
     const commandsDir = path.join(process.cwd(), 'commands');
-    
+
     // S'assurer que le dossier des commandes existe
     if (!fs.existsSync(commandsDir)) {
         fs.mkdirSync(commandsDir, { recursive: true });
     }
-    
+
+    // Vider les collections existantes pour éviter les doublons
+    client.commands.clear();
+    client.aliases.clear();
+
     // Charger toutes les commandes
     loadCommands(client, commandsDir);
-    
+
     // Configurer le watcher pour détecter les changements de fichiers
     const watcher = chokidar.watch(commandsDir, {
         ignored: /(^|[\/\\])\../,
         persistent: true
     });
-    
+
     // Événement lorsqu'un fichier est ajouté
     watcher.on('add', filePath => {
         if (filePath.endsWith('.js')) {
@@ -40,7 +44,7 @@ function init(client) {
             logHandler.log('info', 'Commandes', `Commande ajoutée: ${path.basename(filePath)}`);
         }
     });
-    
+
     // Événement lorsqu'un fichier est modifié
     watcher.on('change', filePath => {
         if (filePath.endsWith('.js')) {
@@ -48,7 +52,7 @@ function init(client) {
             logHandler.log('info', 'Commandes', `Commande mise à jour: ${path.basename(filePath)}`);
         }
     });
-    
+
     // Événement lorsqu'un fichier est supprimé
     watcher.on('unlink', filePath => {
         if (filePath.endsWith('.js')) {
@@ -56,7 +60,7 @@ function init(client) {
             logHandler.log('info', 'Commandes', `Commande supprimée: ${path.basename(filePath)}`);
         }
     });
-    
+
     logHandler.log('info', 'Commandes', 'Gestionnaire de commandes initialisé');
 }
 
@@ -67,13 +71,13 @@ function init(client) {
  */
 function loadCommands(client, dir) {
     const files = getAllFiles(dir);
-    
+
     for (const filePath of files) {
         if (filePath.endsWith('.js')) {
             loadCommand(client, filePath);
         }
     }
-    
+
     logHandler.log('info', 'Commandes', `${client.commands.size} commandes chargées`);
 }
 
@@ -85,17 +89,17 @@ function loadCommands(client, dir) {
  */
 function getAllFiles(dirPath, arrayOfFiles = []) {
     const files = fs.readdirSync(dirPath);
-    
+
     files.forEach(file => {
         const filePath = path.join(dirPath, file);
-        
+
         if (fs.statSync(filePath).isDirectory()) {
             arrayOfFiles = getAllFiles(filePath, arrayOfFiles);
         } else {
             arrayOfFiles.push(filePath);
         }
     });
-    
+
     return arrayOfFiles;
 }
 
@@ -108,27 +112,52 @@ function loadCommand(client, filePath) {
     try {
         // Supprimer le cache du module pour recharger les modifications
         delete require.cache[require.resolve(filePath)];
-        
+
         // Charger la commande
         const command = require(filePath);
-        
+
         // Vérifier que la commande a toutes les propriétés requises
         if (!command.name || !command.run) {
             logHandler.log('error', 'Commandes', `La commande ${filePath} est invalide (il manque le nom ou la fonction run)`);
             return;
         }
-        
+
+        // Définir la catégorie basée sur le répertoire si non spécifiée
+        if (!command.category) {
+            const relativeDir = path.relative(process.cwd(), path.dirname(filePath));
+            const categoryDir = relativeDir.split(path.sep).pop();
+
+            if (categoryDir && categoryDir !== 'commands') {
+                command.category = categoryDir.charAt(0).toUpperCase() + categoryDir.slice(1);
+            } else {
+                command.category = 'Divers';
+            }
+        }
+
+        // Vérifier si la commande existe déjà
+        if (client.commands.has(command.name)) {
+            // Si la commande existe déjà, la décharger d'abord
+            const existingCommand = client.commands.get(command.name);
+
+            // Supprimer les alias existants
+            if (existingCommand.aliases && Array.isArray(existingCommand.aliases)) {
+                existingCommand.aliases.forEach(alias => {
+                    client.aliases.delete(alias);
+                });
+            }
+        }
+
         // Enregistrer la commande dans les collections
         client.commands.set(command.name, command);
         commandPaths.set(command.name, filePath);
-        
+
         // Enregistrer les alias de la commande
         if (command.aliases && Array.isArray(command.aliases)) {
             command.aliases.forEach(alias => {
                 client.aliases.set(alias, command.name);
             });
         }
-        
+
         logHandler.log('debug', 'Commandes', `Commande chargée: ${command.name}`);
     } catch (error) {
         logHandler.log('error', 'Commandes', `Erreur lors du chargement de la commande ${filePath}: ${error.message}`);
@@ -150,12 +179,12 @@ function reloadCommand(client, filePath) {
                 break;
             }
         }
-        
+
         // Si la commande existe déjà, la décharger d'abord
         if (commandName && client.commands.has(commandName)) {
             unloadCommand(client, filePath);
         }
-        
+
         // Charger la commande mise à jour
         loadCommand(client, filePath);
     } catch (error) {
@@ -178,28 +207,28 @@ function unloadCommand(client, filePath) {
                 break;
             }
         }
-        
+
         // Si la commande n'existe pas, rien à faire
         if (!commandName || !client.commands.has(commandName)) {
             return;
         }
-        
+
         const command = client.commands.get(commandName);
-        
+
         // Supprimer les alias
         if (command.aliases && Array.isArray(command.aliases)) {
             command.aliases.forEach(alias => {
                 client.aliases.delete(alias);
             });
         }
-        
+
         // Supprimer la commande
         client.commands.delete(commandName);
         commandPaths.delete(commandName);
-        
+
         // Supprimer du cache
         delete require.cache[require.resolve(filePath)];
-        
+
         logHandler.log('debug', 'Commandes', `Commande déchargée: ${commandName}`);
     } catch (error) {
         logHandler.log('error', 'Commandes', `Erreur lors du déchargement de la commande ${filePath}: ${error.message}`);

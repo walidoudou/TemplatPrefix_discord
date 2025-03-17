@@ -136,3 +136,85 @@ Require stack:
 [17/03/2025 18:16:00] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande owners dans Config ♛
 [17/03/2025 18:16:03] [INFO] [Système] Arrêt du bot en cours...
 [17/03/2025 18:16:03] [INFO] [Base de données] Déconnecté de MongoDB
+[17/03/2025 18:20:36] [INFO] [Logs] Gestionnaire de logs initialisé
+[17/03/2025 18:20:36] [INFO] [Système] Gestionnaire anti-crash initialisé
+[17/03/2025 18:20:36] [DEBUG] [Événements] Événement chargé: messageCreate
+[17/03/2025 18:20:36] [INFO] [Événements] Événement ajouté: messageCreate.js
+[17/03/2025 18:20:36] [DEBUG] [Événements] Événement chargé: ready
+[17/03/2025 18:20:36] [INFO] [Événements] Événement ajouté: ready.js
+[17/03/2025 18:20:36] [DEBUG] [Commandes] Commande chargée: owners
+[17/03/2025 18:20:36] [INFO] [Commandes] Commande ajoutée: owners.js
+[17/03/2025 18:20:36] [DEBUG] [Commandes] Commande chargée: prefix
+[17/03/2025 18:20:36] [INFO] [Commandes] Commande ajoutée: prefix.js
+[17/03/2025 18:20:36] [DEBUG] [Commandes] Commande chargée: pic
+[17/03/2025 18:20:36] [INFO] [Commandes] Commande ajoutée: pic.js
+[17/03/2025 18:20:36] [DEBUG] [Commandes] Commande chargée: ping
+[17/03/2025 18:20:36] [INFO] [Commandes] Commande ajoutée: ping.js
+[17/03/2025 18:20:37] [INFO] [Bot] Bot démarré avec succès
+[17/03/2025 18:20:37] [SUCCESS] [Client] Connecté en tant que TemplatePrefix#0345!
+[17/03/2025 18:20:37] [SUCCESS] [Client] Connecté en tant que TemplatePrefix#0345!
+[17/03/2025 18:20:37] [INFO] [Ready Event] Informations mises à jour pour 1 serveurs
+[17/03/2025 18:20:37] [INFO] [Ready Event] Bot prêt sur 1 serveurs
+[17/03/2025 18:20:37] [INFO] [Ready Event] Servant 14 utilisateurs
+[17/03/2025 18:20:37] [INFO] [Ready Event] Accès à 24 canaux
+[17/03/2025 18:20:37] [INFO] [Ready Event] Préfixe principal: +
+[17/03/2025 18:20:37] [INFO] [Ready Event] Informations mises à jour pour 1 serveurs
+[17/03/2025 18:20:37] [INFO] [Ready Event] Bot prêt sur 1 serveurs
+[17/03/2025 18:20:37] [INFO] [Ready Event] Servant 14 utilisateurs
+[17/03/2025 18:20:37] [INFO] [Ready Event] Accès à 24 canaux
+[17/03/2025 18:20:37] [INFO] [Ready Event] Préfixe principal: +
+[17/03/2025 18:22:48] [DEBUG] [Commandes] Commande déchargée: ping
+[17/03/2025 18:22:48] [DEBUG] [Commandes] Commande chargée: ping
+[17/03/2025 18:22:48] [INFO] [Commandes] Commande mise à jour: ping.js
+[17/03/2025 18:22:50] [DEBUG] [Commandes] Commande déchargée: ping
+[17/03/2025 18:22:50] [DEBUG] [Commandes] Commande chargée: ping
+[17/03/2025 18:22:50] [INFO] [Commandes] Commande mise à jour: ping.js
+[17/03/2025 18:22:55] [DEBUG] [Commandes] Commande déchargée: pic
+[17/03/2025 18:22:55] [ERROR] [Commandes] Erreur lors du chargement de la commande F:\DEV\Templates\Prefix\commands\everyone\pic.js: Unexpected identifier
+[17/03/2025 18:22:55] [INFO] [Commandes] Commande mise à jour: pic.js
+[17/03/2025 18:22:57] [ERROR] [Commandes] Erreur lors du chargement de la commande F:\DEV\Templates\Prefix\commands\everyone\pic.js: Unexpected identifier
+[17/03/2025 18:22:57] [INFO] [Commandes] Commande mise à jour: pic.js
+[17/03/2025 18:23:28] [DEBUG] [Commandes] Commande chargée: pic
+[17/03/2025 18:23:28] [INFO] [Commandes] Commande mise à jour: pic.js
+[17/03/2025 18:23:51] [DEBUG] [Commandes] Commande déchargée: owners
+[17/03/2025 18:23:51] [DEBUG] [Commandes] Commande chargée: owners
+[17/03/2025 18:23:51] [INFO] [Commandes] Commande mise à jour: owners.js
+[17/03/2025 18:24:28] [DEBUG] [Commandes] Commande déchargée: prefix
+[17/03/2025 18:24:28] [DEBUG] [Commandes] Commande chargée: prefix
+[17/03/2025 18:24:28] [INFO] [Commandes] Commande mise à jour: prefix.js
+[17/03/2025 18:24:29] [DEBUG] [Commandes] Commande déchargée: prefix
+[17/03/2025 18:24:29] [DEBUG] [Commandes] Commande chargée: prefix
+[17/03/2025 18:24:29] [INFO] [Commandes] Commande mise à jour: prefix.js
+[17/03/2025 18:24:34] [INFO] [Système] Arrêt du bot en cours...
+[17/03/2025 18:24:34] [INFO] [Base de données] Déconnecté de MongoDB
+[17/03/2025 18:24:37] [INFO] [Logs] Gestionnaire de logs initialisé
+[17/03/2025 18:24:37] [INFO] [Système] Gestionnaire anti-crash initialisé
+[17/03/2025 18:24:37] [DEBUG] [Événements] Événement déchargé: messageCreate
+[17/03/2025 18:24:37] [DEBUG] [Événements] Événement chargé: messageCreate
+[17/03/2025 18:24:37] [INFO] [Événements] Événement ajouté: messageCreate.js
+[17/03/2025 18:24:37] [DEBUG] [Événements] Événement déchargé: ready
+[17/03/2025 18:24:37] [DEBUG] [Événements] Événement chargé: ready
+[17/03/2025 18:24:37] [INFO] [Événements] Événement ajouté: ready.js
+[17/03/2025 18:24:37] [DEBUG] [Commandes] Commande chargée: owners
+[17/03/2025 18:24:37] [INFO] [Commandes] Commande ajoutée: owners.js
+[17/03/2025 18:24:37] [DEBUG] [Commandes] Commande chargée: prefix
+[17/03/2025 18:24:37] [INFO] [Commandes] Commande ajoutée: prefix.js
+[17/03/2025 18:24:37] [DEBUG] [Commandes] Commande chargée: pic
+[17/03/2025 18:24:37] [INFO] [Commandes] Commande ajoutée: pic.js
+[17/03/2025 18:24:37] [DEBUG] [Commandes] Commande chargée: ping
+[17/03/2025 18:24:37] [INFO] [Commandes] Commande ajoutée: ping.js
+[17/03/2025 18:24:38] [INFO] [Bot] Bot démarré avec succès
+[17/03/2025 18:24:38] [SUCCESS] [Client] Connecté en tant que TemplatePrefix#0345!
+[17/03/2025 18:24:38] [INFO] [Ready Event] Informations mises à jour pour 1 serveurs
+[17/03/2025 18:24:38] [INFO] [Ready Event] Bot prêt sur 1 serveurs
+[17/03/2025 18:24:38] [INFO] [Ready Event] Servant 14 utilisateurs
+[17/03/2025 18:24:38] [INFO] [Ready Event] Accès à 24 canaux
+[17/03/2025 18:24:38] [INFO] [Ready Event] Préfixe principal: +
+[17/03/2025 18:24:44] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande ping dans Config ♛
+[17/03/2025 18:25:12] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande pic dans Config ♛
+[17/03/2025 18:25:19] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande owners dans Config ♛
+[17/03/2025 18:26:53] [DEBUG] [Commandes] Commande déchargée: owners
+[17/03/2025 18:26:53] [DEBUG] [Commandes] Commande chargée: owners
+[17/03/2025 18:26:53] [INFO] [Commandes] Commande mise à jour: owners.js
+[17/03/2025 18:27:02] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande owners dans Config ♛
+[17/03/2025 18:27:17] [INFO] [Commandes] .br0kenhe4rt a utilisé la commande ping dans Config ♛
