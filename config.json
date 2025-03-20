@@ -5,8 +5,8 @@
     "activity": "TemplatePrefix",
     "status": "online"
   },
-  "developers": ["599599482405126152"],
-  "owners": ["599599482405126152"],
+  "developers": ["ID_DEVELOPERS"],
+  "owners": ["ID_OWNERS"],
   "embed": {
     "color": "#3498db",
     "footer": "TemplatePrefix - Créé avec ❤️",
