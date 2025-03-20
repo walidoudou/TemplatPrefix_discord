@@ -24,8 +24,8 @@ Un template complet de bot Discord avec système de commandes modulaire, gestion
 1. Clonez ce dépôt:
 
    ```bash
-   git clone https://github.com/votre-utilisateur/discord-bot-template.git
-   cd discord-bot-template
+   git clone https://github.com/walidoudou/TemplatPrefix_discord.git
+   cd TemplatPrefix_discord
    ```
 
 2. Installez les dépendances:
